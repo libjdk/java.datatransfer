@@ -77,7 +77,7 @@ int32_t DataFlavorUtil$TextFlavorComparator::compare($DataFlavor* flavor1, $Data
 		} else {
 			return 1;
 		}
-	} else if (flavor2->isFlavorTextType()) {
+	} else if ($nc(flavor2)->isFlavorTextType()) {
 		return -1;
 	} else {
 		return 0;

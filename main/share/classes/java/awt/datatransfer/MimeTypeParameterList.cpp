@@ -131,7 +131,7 @@ bool MimeTypeParameterList::equals(Object$* thatObject) {
 			if (thisValue != thatValue) {
 				return false;
 			}
-		} else if (!thisValue->equals(thatValue)) {
+		} else if (!$nc(thisValue)->equals(thatValue)) {
 			return false;
 		}
 	}
