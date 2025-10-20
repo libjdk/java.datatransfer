@@ -300,6 +300,7 @@ $Map* SystemFlavorMap::getTextTypeToNative() {
 
 $FlavorMap* SystemFlavorMap::getDefaultFlavorMap() {
 	$init(SystemFlavorMap);
+	$useLocalCurrentObjectStackCache();
 	return $nc($($DataFlavorUtil::getDesktopService()))->getFlavorMap(static_cast<$Supplier*>($$new(SystemFlavorMap$$Lambda$SystemFlavorMap)));
 }
 
@@ -314,6 +315,7 @@ void SystemFlavorMap::init$() {
 }
 
 void SystemFlavorMap::initSystemFlavorMap() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	if (this->isMapInitialized) {
 		return;
@@ -572,6 +574,7 @@ void SystemFlavorMap::store(Object$* hashed, Object$* listed, $Map* map) {
 }
 
 $LinkedHashSet* SystemFlavorMap::nativeToFlavorLookup($String* nat) {
+	$useLocalCurrentObjectStackCache();
 	$var($LinkedHashSet, flavors, $cast($LinkedHashSet, $nc($(getNativeToFlavor()))->get(nat)));
 	if (nat != nullptr && !$nc(this->disabledMappingGenerationKeys)->contains(nat)) {
 		$var($DesktopDatatransferService, desktopService, $DataFlavorUtil::getDesktopService());
@@ -616,6 +619,7 @@ $LinkedHashSet* SystemFlavorMap::nativeToFlavorLookup($String* nat) {
 }
 
 $LinkedHashSet* SystemFlavorMap::flavorToNativeLookup($DataFlavor* flav, bool synthesize) {
+	$useLocalCurrentObjectStackCache();
 	$var($LinkedHashSet, natives, $cast($LinkedHashSet, $nc($(getFlavorToNative()))->get(flav)));
 	if (flav != nullptr && !$nc(this->disabledMappingGenerationKeys)->contains(flav)) {
 		$var($DesktopDatatransferService, desktopService, $DataFlavorUtil::getDesktopService());
@@ -652,6 +656,7 @@ $LinkedHashSet* SystemFlavorMap::flavorToNativeLookup($DataFlavor* flav, bool sy
 
 $List* SystemFlavorMap::getNativesForFlavor($DataFlavor* flav) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($LinkedHashSet, retval, $nc(this->nativesForFlavorCache)->check(flav));
 		if (retval != nullptr) {
 			return $new($ArrayList, static_cast<$Collection*>(static_cast<$AbstractCollection*>(static_cast<$AbstractSet*>(static_cast<$HashSet*>(retval)))));
@@ -694,6 +699,7 @@ $List* SystemFlavorMap::getNativesForFlavor($DataFlavor* flav) {
 
 $List* SystemFlavorMap::getFlavorsForNative($String* nat) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($LinkedHashSet, returnValue, $nc(this->flavorsForNativeCache)->check(nat));
 		if (returnValue != nullptr) {
 			return $new($ArrayList, static_cast<$Collection*>(static_cast<$AbstractCollection*>(static_cast<$AbstractSet*>(static_cast<$HashSet*>(returnValue)))));
@@ -737,6 +743,7 @@ $List* SystemFlavorMap::getFlavorsForNative($String* nat) {
 
 $Set* SystemFlavorMap::convertMimeTypeToDataFlavors($String* baseType) {
 	$init(SystemFlavorMap);
+	$useLocalCurrentObjectStackCache();
 	$var($Set, returnValue, $new($LinkedHashSet));
 	$var($String, subType, nullptr);
 	try {
@@ -844,6 +851,7 @@ $Set* SystemFlavorMap::convertMimeTypeToDataFlavors($String* baseType) {
 
 $LinkedHashSet* SystemFlavorMap::handleHtmlMimeTypes($String* baseType, $String* mimeType) {
 	$init(SystemFlavorMap);
+	$useLocalCurrentObjectStackCache();
 	$var($LinkedHashSet, returnValues, $new($LinkedHashSet));
 	if ($nc(SystemFlavorMap::HTML_TEXT_BASE_TYPE)->equals(baseType)) {
 		{
@@ -865,6 +873,7 @@ $LinkedHashSet* SystemFlavorMap::handleHtmlMimeTypes($String* baseType, $String*
 
 $Map* SystemFlavorMap::getNativesForFlavors($DataFlavorArray* flavors$renamed) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($DataFlavorArray, flavors, flavors$renamed);
 		if (flavors == nullptr) {
 			$var($List, flavor_list, getFlavorsForNative(nullptr));
@@ -891,6 +900,7 @@ $Map* SystemFlavorMap::getNativesForFlavors($DataFlavorArray* flavors$renamed) {
 
 $Map* SystemFlavorMap::getFlavorsForNatives($StringArray* natives$renamed) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($StringArray, natives, natives$renamed);
 		if (natives == nullptr) {
 			$var($List, nativesList, getNativesForFlavor(nullptr));
@@ -917,6 +927,7 @@ $Map* SystemFlavorMap::getFlavorsForNatives($StringArray* natives$renamed) {
 
 void SystemFlavorMap::addUnencodedNativeForFlavor($DataFlavor* flav, $String* nat) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$Objects::requireNonNull($of(nat), "Null native not permitted"_s);
 		$Objects::requireNonNull($of(flav), "Null flavor not permitted"_s);
 		$var($LinkedHashSet, natives, $cast($LinkedHashSet, $nc($(getFlavorToNative()))->get(flav)));
@@ -931,6 +942,7 @@ void SystemFlavorMap::addUnencodedNativeForFlavor($DataFlavor* flav, $String* na
 
 void SystemFlavorMap::setNativesForFlavor($DataFlavor* flav, $StringArray* natives) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$Objects::requireNonNull($of(natives), "Null natives not permitted"_s);
 		$Objects::requireNonNull($of(flav), "Null flavors not permitted"_s);
 		$nc($(getFlavorToNative()))->remove(flav);
@@ -952,6 +964,7 @@ void SystemFlavorMap::setNativesForFlavor($DataFlavor* flav, $StringArray* nativ
 
 void SystemFlavorMap::addFlavorForUnencodedNative($String* nat, $DataFlavor* flav) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$Objects::requireNonNull($of(nat), "Null native not permitted"_s);
 		$Objects::requireNonNull($of(flav), "Null flavor not permitted"_s);
 		$var($LinkedHashSet, flavors, $cast($LinkedHashSet, $nc($(getNativeToFlavor()))->get(nat)));
@@ -966,6 +979,7 @@ void SystemFlavorMap::addFlavorForUnencodedNative($String* nat, $DataFlavor* fla
 
 void SystemFlavorMap::setFlavorsForNative($String* nat, $DataFlavorArray* flavors) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$Objects::requireNonNull($of(nat), "Null native not permitted"_s);
 		$Objects::requireNonNull($of(flavors), "Null flavors not permitted"_s);
 		$nc($(getNativeToFlavor()))->remove(nat);
@@ -1002,6 +1016,7 @@ bool SystemFlavorMap::isJavaMIMEType($String* str) {
 
 $String* SystemFlavorMap::decodeJavaMIMEType($String* nat) {
 	$init(SystemFlavorMap);
+	$useLocalCurrentObjectStackCache();
 	$var($String, var$0, nullptr);
 	if (isJavaMIMEType(nat)) {
 		int32_t var$1 = $nc(SystemFlavorMap::JavaMIME)->length();

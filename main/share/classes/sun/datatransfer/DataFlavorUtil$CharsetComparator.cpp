@@ -99,6 +99,7 @@ void DataFlavorUtil$CharsetComparator::init$() {
 }
 
 int32_t DataFlavorUtil$CharsetComparator::compare($String* charset1$renamed, $String* charset2$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, charset2, charset2$renamed);
 	$var($String, charset1, charset1$renamed);
 	$assign(charset1, getEncoding(charset1));
@@ -127,6 +128,7 @@ int32_t DataFlavorUtil$CharsetComparator::compare(Object$* charset1, Object$* ch
 }
 
 void clinit$DataFlavorUtil$CharsetComparator($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(DataFlavorUtil$CharsetComparator::UNSUPPORTED_CHARSET, "UNSUPPORTED"_s);
 	$assignStatic(DataFlavorUtil$CharsetComparator::INSTANCE, $new(DataFlavorUtil$CharsetComparator));
 	$assignStatic(DataFlavorUtil$CharsetComparator::DEFAULT_CHARSET_INDEX, $Integer::valueOf(2));

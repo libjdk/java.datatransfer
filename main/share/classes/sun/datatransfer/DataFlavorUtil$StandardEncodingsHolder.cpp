@@ -76,6 +76,7 @@ void DataFlavorUtil$StandardEncodingsHolder::init$() {
 
 $SortedSet* DataFlavorUtil$StandardEncodingsHolder::load() {
 	$init(DataFlavorUtil$StandardEncodingsHolder);
+	$useLocalCurrentObjectStackCache();
 	$var($SortedSet, tempSet, $new($TreeSet, $($nc($($DataFlavorUtil::getCharsetComparator()))->reversed())));
 	tempSet->add("US-ASCII"_s);
 	tempSet->add("ISO-8859-1"_s);

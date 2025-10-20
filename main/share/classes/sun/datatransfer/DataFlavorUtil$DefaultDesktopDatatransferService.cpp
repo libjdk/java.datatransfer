@@ -96,6 +96,7 @@ void DataFlavorUtil$DefaultDesktopDatatransferService::init$() {
 
 $DesktopDatatransferService* DataFlavorUtil$DefaultDesktopDatatransferService::getDesktopService() {
 	$init(DataFlavorUtil$DefaultDesktopDatatransferService);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$load($DesktopDatatransferService);
 	$var($ServiceLoader, loader, $ServiceLoader::load($DesktopDatatransferService::class$, ($ClassLoader*)nullptr));

@@ -115,6 +115,7 @@ void DataFlavorUtil$DataFlavorComparator::init$() {
 }
 
 int32_t DataFlavorUtil$DataFlavorComparator::compare($DataFlavor* flavor1, $DataFlavor* flavor2) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(flavor1)->equals(flavor2)) {
 		return 0;
 	}
@@ -177,6 +178,7 @@ int32_t DataFlavorUtil$DataFlavorComparator::compare(Object$* flavor1, Object$* 
 }
 
 void clinit$DataFlavorUtil$DataFlavorComparator($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(DataFlavorUtil$DataFlavorComparator::INSTANCE, $new(DataFlavorUtil$DataFlavorComparator));
 	$assignStatic(DataFlavorUtil$DataFlavorComparator::UNKNOWN_OBJECT_LOSES, $Integer::valueOf($Integer::MIN_VALUE));
 	$assignStatic(DataFlavorUtil$DataFlavorComparator::UNKNOWN_OBJECT_WINS, $Integer::valueOf($Integer::MAX_VALUE));

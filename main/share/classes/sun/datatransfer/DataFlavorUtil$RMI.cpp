@@ -145,6 +145,7 @@ bool DataFlavorUtil$RMI::isRemote($Class* c) {
 
 $Object* DataFlavorUtil$RMI::newMarshalledObject(Object$* obj) {
 	$init(DataFlavorUtil$RMI);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	try {
 		return $of(DataFlavorUtil$RMI::marshallCtor == nullptr ? ($Object*)nullptr : $nc(DataFlavorUtil$RMI::marshallCtor)->newInstance($$new($ObjectArray, {obj})));
@@ -167,6 +168,7 @@ $Object* DataFlavorUtil$RMI::newMarshalledObject(Object$* obj) {
 
 $Object* DataFlavorUtil$RMI::getMarshalledObject(Object$* obj) {
 	$init(DataFlavorUtil$RMI);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	try {
 		return $of(DataFlavorUtil$RMI::marshallGet == nullptr ? ($Object*)nullptr : $nc(DataFlavorUtil$RMI::marshallGet)->invoke(obj, $$new($ObjectArray, 0)));
@@ -188,6 +190,7 @@ $Object* DataFlavorUtil$RMI::getMarshalledObject(Object$* obj) {
 }
 
 void clinit$DataFlavorUtil$RMI($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(DataFlavorUtil$RMI::remoteClass$, DataFlavorUtil$RMI::getClass("java.rmi.Remote"_s));
 	$assignStatic(DataFlavorUtil$RMI::marshallObjectClass, DataFlavorUtil$RMI::getClass("java.rmi.MarshalledObject"_s));
 	$load($Object);

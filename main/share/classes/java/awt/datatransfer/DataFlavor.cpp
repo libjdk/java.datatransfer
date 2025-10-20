@@ -235,6 +235,7 @@ DataFlavor* DataFlavor::allHtmlFlavor = nullptr;
 
 $Class* DataFlavor::tryToLoadClass($String* className, $ClassLoader* fallback) {
 	$init(DataFlavor);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$ReflectUtil::checkPackageAccess(className);
 	try {
@@ -286,6 +287,7 @@ DataFlavor* DataFlavor::createConstant($String* mt, $String* prn) {
 
 DataFlavor* DataFlavor::initHtml($String* htmlFlavorType) {
 	$init(DataFlavor);
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $new(DataFlavor, $$str({"text/html; class=java.lang.String;document="_s, htmlFlavorType, ";charset=Unicode"_s}));
 	} catch ($Exception&) {
@@ -299,6 +301,7 @@ void DataFlavor::init$() {
 }
 
 void DataFlavor::init$($String* primaryType, $String* subType, $MimeTypeParameterList* params$renamed, $Class* representationClass, $String* humanPresentableName$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, humanPresentableName, humanPresentableName$renamed);
 	$var($MimeTypeParameterList, params, params$renamed);
 	if (primaryType == nullptr) {
@@ -339,6 +342,7 @@ void DataFlavor::init$($Class* representationClass, $String* humanPresentableNam
 }
 
 void DataFlavor::init$($String* mimeType, $String* humanPresentableName) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	if (mimeType == nullptr) {
 		$throwNew($NullPointerException, "mimeType"_s);
@@ -355,6 +359,7 @@ void DataFlavor::init$($String* mimeType, $String* humanPresentableName) {
 }
 
 void DataFlavor::init$($String* mimeType, $String* humanPresentableName, $ClassLoader* classLoader) {
+	$useLocalCurrentObjectStackCache();
 	if (mimeType == nullptr) {
 		$throwNew($NullPointerException, "mimeType"_s);
 	}
@@ -367,6 +372,7 @@ void DataFlavor::init$($String* mimeType, $String* humanPresentableName, $ClassL
 }
 
 void DataFlavor::init$($String* mimeType) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	if (mimeType == nullptr) {
 		$throwNew($NullPointerException, "mimeType"_s);
@@ -380,6 +386,7 @@ void DataFlavor::init$($String* mimeType) {
 }
 
 void DataFlavor::initialize($String* mimeType, $String* humanPresentableName$renamed, $ClassLoader* classLoader) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, humanPresentableName, humanPresentableName$renamed);
 	if (mimeType == nullptr) {
 		$throwNew($NullPointerException, "mimeType"_s);
@@ -409,12 +416,14 @@ void DataFlavor::initialize($String* mimeType, $String* humanPresentableName$ren
 }
 
 $String* DataFlavor::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, string, $of(this)->getClass()->getName());
 	$plusAssign(string, $$str({"["_s, $(paramString()), "]"_s}));
 	return string;
 }
 
 $String* DataFlavor::paramString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, params, ""_s);
 	$plusAssign(params, "mimetype="_s);
 	if (this->mimeType == nullptr) {
@@ -443,11 +452,13 @@ $String* DataFlavor::paramString() {
 
 DataFlavor* DataFlavor::getTextPlainUnicodeFlavor() {
 	$init(DataFlavor);
+	$useLocalCurrentObjectStackCache();
 	return $new(DataFlavor, $$str({"text/plain;charset="_s, $($nc($($DataFlavorUtil::getDesktopService()))->getDefaultUnicodeEncoding()), ";class=java.io.InputStream"_s}), "Plain Text"_s);
 }
 
 DataFlavor* DataFlavor::selectBestTextFlavor($DataFlavorArray* availableFlavors) {
 	$init(DataFlavor);
+	$useLocalCurrentObjectStackCache();
 	if (availableFlavors == nullptr || $nc(availableFlavors)->length == 0) {
 		return nullptr;
 	}
@@ -460,6 +471,7 @@ DataFlavor* DataFlavor::selectBestTextFlavor($DataFlavorArray* availableFlavors)
 }
 
 $Reader* DataFlavor::getReaderForText($Transferable* transferable) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, transferObject, $nc(transferable)->getTransferData(this));
 	if (transferObject == nullptr) {
 		$throwNew($IllegalArgumentException, "getTransferData() returned null"_s);
@@ -533,6 +545,7 @@ bool DataFlavor::equals(Object$* o) {
 }
 
 bool DataFlavor::equals(DataFlavor* that) {
+	$useLocalCurrentObjectStackCache();
 	if (that == nullptr) {
 		return false;
 	}
@@ -580,6 +593,7 @@ bool DataFlavor::equals($String* s) {
 }
 
 int32_t DataFlavor::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t total = 0;
 	if (this->representationClass != nullptr) {
 		total += $nc($of(this->representationClass))->hashCode();
@@ -613,6 +627,7 @@ bool DataFlavor::match(DataFlavor* that) {
 }
 
 bool DataFlavor::isMimeTypeEqual($String* mimeType) {
+	$useLocalCurrentObjectStackCache();
 	if (mimeType == nullptr) {
 		$throwNew($NullPointerException, "mimeType"_s);
 	}
@@ -730,6 +745,7 @@ void DataFlavor::writeExternal($ObjectOutput* os) {
 
 void DataFlavor::readExternal($ObjectInput* is) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$beforeCallerSensitive();
 		$var($String, rcn, nullptr);
 		$set(this, mimeType, $cast($MimeType, $nc(is)->readObject()));

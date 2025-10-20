@@ -96,6 +96,7 @@ void MimeTypeParameterList::init$($String* rawdata) {
 }
 
 int32_t MimeTypeParameterList::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t code = $Integer::MAX_VALUE / 45;
 	$var($String, paramName, nullptr);
 	$var($Enumeration, enum_, this->getNames());
@@ -108,6 +109,7 @@ int32_t MimeTypeParameterList::hashCode() {
 }
 
 bool MimeTypeParameterList::equals(Object$* thatObject) {
+	$useLocalCurrentObjectStackCache();
 	if (!($instanceOf(MimeTypeParameterList, thatObject))) {
 		return false;
 	}
@@ -139,6 +141,7 @@ bool MimeTypeParameterList::equals(Object$* thatObject) {
 }
 
 void MimeTypeParameterList::parse($String* rawdata) {
+	$useLocalCurrentObjectStackCache();
 	int32_t length = $nc(rawdata)->length();
 	if (length > 0) {
 		int32_t currentIndex = skipWhiteSpace(rawdata, 0);
@@ -235,14 +238,17 @@ bool MimeTypeParameterList::isEmpty() {
 }
 
 $String* MimeTypeParameterList::get($String* name) {
+	$useLocalCurrentObjectStackCache();
 	return $cast($String, $nc(this->parameters)->get($($($nc(name)->trim())->toLowerCase())));
 }
 
 void MimeTypeParameterList::set($String* name, $String* value) {
+	$useLocalCurrentObjectStackCache();
 	$nc(this->parameters)->put($($($nc(name)->trim())->toLowerCase()), value);
 }
 
 void MimeTypeParameterList::remove($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$nc(this->parameters)->remove($($($nc(name)->trim())->toLowerCase()));
 }
 
@@ -251,6 +257,7 @@ $Enumeration* MimeTypeParameterList::getNames() {
 }
 
 $String* MimeTypeParameterList::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, buffer, $new($StringBuilder, $nc(this->parameters)->size() * 16));
 	$var($Enumeration, keys, $nc(this->parameters)->keys());
 	while ($nc(keys)->hasMoreElements()) {

@@ -251,6 +251,7 @@ $String* Clipboard::getName() {
 
 void Clipboard::setContents($Transferable* contents, $ClipboardOwner* owner) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($ClipboardOwner, oldOwner, this->owner);
 		$var($Transferable, oldContents, this->contents);
 		$set(this, owner, owner);
@@ -327,6 +328,7 @@ $FlavorListenerArray* Clipboard::getFlavorListeners() {
 }
 
 void Clipboard::fireFlavorsChanged() {
+	$useLocalCurrentObjectStackCache();
 	if (this->flavorListeners == nullptr) {
 		return;
 	}
@@ -339,6 +341,7 @@ void Clipboard::fireFlavorsChanged() {
 }
 
 $Set* Clipboard::getAvailableDataFlavorSet() {
+	$useLocalCurrentObjectStackCache();
 	$var($Set, set, $new($HashSet));
 	$var($Transferable, contents, getContents(nullptr));
 	if (contents != nullptr) {
@@ -351,6 +354,7 @@ $Set* Clipboard::getAvailableDataFlavorSet() {
 }
 
 void Clipboard::lambda$fireFlavorsChanged$2($FlavorListener* listener) {
+	$useLocalCurrentObjectStackCache();
 	$nc($($DataFlavorUtil::getDesktopService()))->invokeOnEventThread(static_cast<$Runnable*>($$new(Clipboard$$Lambda$lambda$fireFlavorsChanged$1$2, this, listener)));
 }
 

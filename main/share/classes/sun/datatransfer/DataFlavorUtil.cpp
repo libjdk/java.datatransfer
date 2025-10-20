@@ -154,6 +154,7 @@ $Set* DataFlavorUtil::standardEncodings() {
 
 $String* DataFlavorUtil::canonicalName($String* encoding) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	if (encoding == nullptr) {
 		return nullptr;
 	}
@@ -171,6 +172,7 @@ $String* DataFlavorUtil::canonicalName($String* encoding) {
 
 bool DataFlavorUtil::doesSubtypeSupportCharset($DataFlavor* flavor) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	$var($String, subType, $nc(flavor)->getSubType());
 	if (subType == nullptr) {
 		return false;
@@ -186,6 +188,7 @@ bool DataFlavorUtil::doesSubtypeSupportCharset($DataFlavor* flavor) {
 
 bool DataFlavorUtil::doesSubtypeSupportCharset($String* subType, $String* charset) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	$var($Boolean, support, $cast($Boolean, $nc(DataFlavorUtil::textMIMESubtypeCharsetSupport)->get(subType)));
 	if (support != nullptr) {
 		return support->booleanValue();
@@ -197,6 +200,7 @@ bool DataFlavorUtil::doesSubtypeSupportCharset($String* subType, $String* charse
 
 bool DataFlavorUtil::isFlavorCharsetTextType($DataFlavor* flavor) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	$init($DataFlavor);
 	if ($nc($DataFlavor::stringFlavor)->equals(flavor)) {
 		return true;
@@ -237,6 +241,7 @@ bool DataFlavorUtil::isFlavorNoncharsetTextType($DataFlavor* flavor) {
 
 $String* DataFlavorUtil::getTextCharset($DataFlavor* flavor) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	if (!isFlavorCharsetTextType(flavor)) {
 		return nullptr;
 	}
@@ -260,6 +265,7 @@ bool DataFlavorUtil::isEncodingSupported($String* encoding) {
 
 int32_t DataFlavorUtil::compareIndices($Map* indexMap, Object$* obj1, Object$* obj2, $Integer* fallbackIndex) {
 	$init(DataFlavorUtil);
+	$useLocalCurrentObjectStackCache();
 	$var($Integer, index1, $cast($Integer, $nc(indexMap)->getOrDefault(obj1, fallbackIndex)));
 	$var($Integer, index2, $cast($Integer, indexMap->getOrDefault(obj2, fallbackIndex)));
 	return $nc(index1)->compareTo(index2);

@@ -146,6 +146,7 @@ bool MimeType::equals(Object$* thatObject) {
 }
 
 void MimeType::parse($String* rawdata) {
+	$useLocalCurrentObjectStackCache();
 	int32_t slashIndex = $nc(rawdata)->indexOf((int32_t)u'/');
 	int32_t semIndex = rawdata->indexOf((int32_t)u';');
 	if ((slashIndex < 0) && (semIndex < 0)) {
@@ -198,6 +199,7 @@ void MimeType::removeParameter($String* name) {
 }
 
 $String* MimeType::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, var$0, $(getBaseType()));
 	return $concat(var$0, $($nc(this->parameters)->toString()));
 }
@@ -207,6 +209,7 @@ $String* MimeType::getBaseType() {
 }
 
 bool MimeType::match(MimeType* type) {
+	$useLocalCurrentObjectStackCache();
 	if (type == nullptr) {
 		return false;
 	}
@@ -227,6 +230,7 @@ bool MimeType::match($String* rawdata) {
 }
 
 void MimeType::writeExternal($ObjectOutput* out) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, s, toString());
 	if ($nc(s)->length() <= 0x0000FFFF) {
 		$nc(out)->writeUTF(s);
@@ -239,6 +243,7 @@ void MimeType::writeExternal($ObjectOutput* out) {
 }
 
 void MimeType::readExternal($ObjectInput* in) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, s, $nc(in)->readUTF());
 	if (s == nullptr || $nc(s)->length() == 0) {
 		$var($ByteArrayOutputStream, baos, $new($ByteArrayOutputStream));
